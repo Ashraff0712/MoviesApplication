@@ -1,13 +1,19 @@
 package com.example.moviesapplication.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.moviesapplication.R
 import com.example.moviesapplication.databinding.MovieLayoutBinding
+import com.example.moviesapplication.model.OnMovieItemClickListener
+import com.example.moviesapplication.view.DetailedFragment
 
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(private val onMovieItemClickListener: OnMovieItemClickListener) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     private var movieList = ArrayList<com.example.moviesapplication.model.Result>()
     fun setMovieList(movieList: List<com.example.moviesapplication.model.Result>) {
         this.movieList = movieList as ArrayList<com.example.moviesapplication.model.Result>
@@ -31,6 +37,14 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
             .load("https://image.tmdb.org/t/p/w500" + movieList[position].poster_path)
             .into(holder.binding.movieImage)
         holder.binding.movieName.text = movieList[position].title
+
+
+        val movie = movieList[position]
+        holder.itemView.setOnClickListener{
+            onMovieItemClickListener.onMovieItemClicked(position)
+        }
+
+
     }
 
     override fun getItemCount(): Int {

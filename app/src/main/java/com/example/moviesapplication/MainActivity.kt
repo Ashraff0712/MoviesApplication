@@ -2,34 +2,28 @@ package com.example.moviesapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.findFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviesapplication.adapter.MovieAdapter
 import com.example.moviesapplication.databinding.ActivityMainBinding
 import com.example.moviesapplication.viewModel.MovieViewModel
 
 class MainActivity : AppCompatActivity() {
+    private  lateinit var navController: NavController
     private lateinit var binding : ActivityMainBinding
-    private lateinit var viewModel: MovieViewModel
-    private lateinit var movieAdapter : MovieAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        prepareRecyclerView()
-        viewModel = ViewModelProvider(this)[MovieViewModel::class.java]
-        viewModel.getPopularMovies()
-        viewModel.observeMovieLiveData().observe(this, Observer { movieList ->
-            movieAdapter.setMovieList(movieList)
-        })
+
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.navControllerHome) as NavHostFragment
+        navController = navHostFragment.navController
     }
 
-    private fun prepareRecyclerView() {
-        movieAdapter = MovieAdapter()
-        binding.rvMovies.apply {
-            layoutManager = GridLayoutManager(applicationContext,2)
-            adapter = movieAdapter
-        }
-    }
+
 }
