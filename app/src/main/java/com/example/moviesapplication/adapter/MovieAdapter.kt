@@ -5,8 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.moviesapplication.MyDiffUtil
 import com.example.moviesapplication.R
 import com.example.moviesapplication.databinding.MovieLayoutBinding
 import com.example.moviesapplication.model.OnMovieItemClickListener
@@ -14,10 +16,15 @@ import com.example.moviesapplication.view.DetailedFragment
 
 
 class MovieAdapter(private val onMovieItemClickListener: OnMovieItemClickListener) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+    private var oldItemList = emptyList<com.example.moviesapplication.model.Result>()
     private var movieList = ArrayList<com.example.moviesapplication.model.Result>()
     fun setMovieList(movieList: List<com.example.moviesapplication.model.Result>) {
         this.movieList = movieList as ArrayList<com.example.moviesapplication.model.Result>
-        notifyDataSetChanged()
+
+        val diffUtil = MyDiffUtil(oldItemList,movieList)
+        val diffResult = DiffUtil.calculateDiff(diffUtil)
+        oldItemList = movieList
+        diffResult.dispatchUpdatesTo(this)
     }
 
     class ViewHolder(val binding: MovieLayoutBinding) : RecyclerView.ViewHolder(binding.root) {}
@@ -50,4 +57,6 @@ class MovieAdapter(private val onMovieItemClickListener: OnMovieItemClickListene
     override fun getItemCount(): Int {
         return movieList.size
     }
+
+
 }
