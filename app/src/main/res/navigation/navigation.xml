@@ -25,5 +25,8 @@
         <argument
             android:name="user"
             app:argType="string" />
+        <argument
+            android:name="fullInfo"
+            app:argType="com.example.moviesapplication.model.Result" />
     </fragment>
 </navigation>

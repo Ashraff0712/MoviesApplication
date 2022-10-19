@@ -12,22 +12,24 @@ import com.example.moviesapplication.MyDiffUtil
 import com.example.moviesapplication.R
 import com.example.moviesapplication.databinding.MovieLayoutBinding
 import com.example.moviesapplication.model.OnMovieItemClickListener
-import com.example.moviesapplication.view.DetailedFragment
+import com.example.moviesapplication.model.Result
 
 
-class MovieAdapter(private val onMovieItemClickListener: OnMovieItemClickListener) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
-    private var oldItemList = emptyList<com.example.moviesapplication.model.Result>()
-    private var movieList = ArrayList<com.example.moviesapplication.model.Result>()
-    fun setMovieList(movieList: List<com.example.moviesapplication.model.Result>) {
-        this.movieList = movieList as ArrayList<com.example.moviesapplication.model.Result>
+class MovieAdapter(private val onMovieItemClickListener: OnMovieItemClickListener) :
+    RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+    private var oldItemList = emptyList<Result>()
+    private var movieList = ArrayList<Result>()
+    fun setMovieList(movieList: List<Result>) {
+        this.movieList = movieList as ArrayList<Result>
 
-        val diffUtil = MyDiffUtil(oldItemList,movieList)
+        val diffUtil = MyDiffUtil(oldItemList, movieList)
         val diffResult = DiffUtil.calculateDiff(diffUtil)
         oldItemList = movieList
         diffResult.dispatchUpdatesTo(this)
     }
 
-    class ViewHolder(val binding: MovieLayoutBinding) : RecyclerView.ViewHolder(binding.root) {}
+    class ViewHolder(val binding: MovieLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -47,7 +49,7 @@ class MovieAdapter(private val onMovieItemClickListener: OnMovieItemClickListene
 
 
         val movie = movieList[position]
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             onMovieItemClickListener.onMovieItemClicked(position)
         }
 

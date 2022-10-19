@@ -1,8 +1,9 @@
 package com.example.moviesapplication
 
+import com.example.moviesapplication.model.Result
 import androidx.recyclerview.widget.DiffUtil
 
-class MyDiffUtil(private val oldList: List<com.example.moviesapplication.model.Result>,private val newList: List<com.example.moviesapplication.model.Result>): DiffUtil.Callback(
+class MyDiffUtil(private val oldList: List<Result>,private val newList: List<Result>): DiffUtil.Callback(
 
 
 ) {

@@ -1,7 +1,11 @@
 package com.example.moviesapplication.model
 
-data class Result(
-    val adult: Boolean,
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class Result (
+    val adult: String,
     val backdrop_path: String,
     val genre_ids: List<Int>,
     val id: Int,
@@ -15,4 +19,4 @@ data class Result(
     val video: Boolean,
     val vote_average: Double,
     val vote_count: Int
-)
+):Parcelable

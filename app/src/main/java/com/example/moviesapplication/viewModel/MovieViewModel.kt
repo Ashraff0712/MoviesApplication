@@ -9,11 +9,14 @@ import com.example.moviesapplication.retrofit.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.example.moviesapplication.model.Result
+
+const val apikey:String = "69d66957eebff9666ea46bd464773cf0"
 
 class MovieViewModel : ViewModel() {
-    private var movieLiveData = MutableLiveData<List<com.example.moviesapplication.model.Result>>()
+    private var movieLiveData = MutableLiveData<List<Result>>()
     fun getPopularMovies() {
-        RetrofitInstance.api.getPopularMovies("69d66957eebff9666ea46bd464773cf0").enqueue(object  :
+        RetrofitInstance.api.getPopularMovies(apikey).enqueue(object  :
             Callback<Movies> {
             override fun onResponse(call: Call<Movies>, response: Response<Movies>) {
                 if (response.body()!=null){
@@ -28,7 +31,7 @@ class MovieViewModel : ViewModel() {
             }
         })
     }
-    fun observeMovieLiveData() : LiveData<List<com.example.moviesapplication.model.Result>> {
+    fun observeMovieLiveData() : LiveData<List<Result>> {
         return movieLiveData
     }
 }

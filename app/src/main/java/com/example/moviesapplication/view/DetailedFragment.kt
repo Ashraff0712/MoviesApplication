@@ -6,20 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.os.bundleOf
+
 import com.example.moviesapplication.R
 import com.example.moviesapplication.databinding.FragmentDetailedBinding
-import com.example.moviesapplication.databinding.FragmentHomeBinding
-import com.example.moviesapplication.model.Result
 
-private  var movieList = ArrayList<com.example.moviesapplication.model.Result>()
 private lateinit var binding: FragmentDetailedBinding
-private var user = ArrayList<com.example.moviesapplication.model.Result>()
+private  var user:Bundle?= null
+private var fullInfo:Bundle? = null
+
+
 class DetailedFragment : Fragment(R.layout.fragment_detailed) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        arguments?.let { bundle ->
+            user = bundle.getBundle("user")
+            fullInfo = bundle.getBundle("fullInfo")
+
+
+        }
 
     }
     override fun onCreateView(
@@ -38,7 +44,8 @@ class DetailedFragment : Fragment(R.layout.fragment_detailed) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.textView.text = "Reached Detailed Fragment"
+        binding.textView.text = arguments?.getString("user")
+        binding.textView4.text = arguments?.getString("fullInfo")
     }
 
 
