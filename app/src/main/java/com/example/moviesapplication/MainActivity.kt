@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviesapplication.adapter.MovieAdapter
 import com.example.moviesapplication.databinding.ActivityMainBinding
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.navControllerHome) as NavHostFragment
         navController = navHostFragment.navController
+
+        setupActionBarWithNavController(navController)
     }
 
 
