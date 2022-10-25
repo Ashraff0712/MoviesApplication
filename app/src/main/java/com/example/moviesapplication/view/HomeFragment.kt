@@ -14,12 +14,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviesapplication.R
 import com.example.moviesapplication.adapter.MovieAdapter
 import com.example.moviesapplication.databinding.FragmentHomeBinding
-import com.example.moviesapplication.model.OnMovieItemClickListener
 import com.example.moviesapplication.viewModel.MovieViewModel
 import com.example.moviesapplication.model.Result
 import com.example.moviesapplication.repository.HomeRepository
 
-class HomeFragment : Fragment(), OnMovieItemClickListener {
+class HomeFragment : Fragment(){
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: MovieViewModel
@@ -47,7 +46,7 @@ class HomeFragment : Fragment(), OnMovieItemClickListener {
     }
 
     private fun prepareRecyclerView() {
-        movieAdapter = MovieAdapter(this)
+        movieAdapter = MovieAdapter { position -> onListItemClick(position)  }
         binding.rvMovies.apply {
             layoutManager = GridLayoutManager(activity, 2)
             adapter = movieAdapter
@@ -56,9 +55,7 @@ class HomeFragment : Fragment(), OnMovieItemClickListener {
     }
 
 
-    override fun onMovieItemClicked(position: Int) {
-
-
+    private fun onListItemClick(position: Int) {
         val user = movieList[position].title
         val fullInfo = (movieList[position].release_date)
 
@@ -67,6 +64,7 @@ class HomeFragment : Fragment(), OnMovieItemClickListener {
 
         view?.findNavController()?.navigate(R.id.detailed_Fragment, bundle)
     }
+
 
 
 }

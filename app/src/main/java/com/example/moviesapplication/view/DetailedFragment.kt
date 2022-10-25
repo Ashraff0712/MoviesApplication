@@ -6,16 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 
 import com.example.moviesapplication.R
 import com.example.moviesapplication.databinding.FragmentDetailedBinding
-
-private lateinit var binding: FragmentDetailedBinding
-private  var user:Bundle?= null
-private var fullInfo:Bundle? = null
+import com.example.moviesapplication.viewModel.MovieViewModel
 
 
 class DetailedFragment : Fragment(R.layout.fragment_detailed) {
+
+    private lateinit var binding: FragmentDetailedBinding
+    private  var user:Bundle?= null
+    private var fullInfo:Bundle? = null
+    private val sharedViewModel:MovieViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

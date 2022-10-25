@@ -1,21 +1,16 @@
 package com.example.moviesapplication.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviesapplication.MyDiffUtil
-import com.example.moviesapplication.R
 import com.example.moviesapplication.databinding.MovieLayoutBinding
-import com.example.moviesapplication.model.OnMovieItemClickListener
 import com.example.moviesapplication.model.Result
 
 
-class MovieAdapter(private val onMovieItemClickListener: OnMovieItemClickListener) :
+class MovieAdapter(private val onItemClicked: (position: Int) -> Unit) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     private var oldItemList = emptyList<Result>()
     private var movieList = ArrayList<Result>()
@@ -50,7 +45,7 @@ class MovieAdapter(private val onMovieItemClickListener: OnMovieItemClickListene
 
         val movie = movieList[position]
         holder.itemView.setOnClickListener {
-            onMovieItemClickListener.onMovieItemClicked(position)
+            onItemClicked(position)
         }
 
 
