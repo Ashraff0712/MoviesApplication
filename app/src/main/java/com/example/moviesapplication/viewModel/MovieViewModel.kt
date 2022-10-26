@@ -29,7 +29,7 @@ class MovieViewModel : ViewModel() {
     }
 
     fun sendData(position:Int): String {
-         return movieList[position].title
+        return movieList[position].title
     }
 
 

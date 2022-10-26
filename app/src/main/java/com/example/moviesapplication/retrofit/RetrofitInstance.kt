@@ -11,11 +11,12 @@ object RetrofitInstance {
 
 
 
-    val api : MovieApi by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(MovieApi::class.java)
-    }
+   fun getInstance():Retrofit {
+       return Retrofit.Builder()
+           .baseUrl(BASE_URL)
+           .addConverterFactory(GsonConverterFactory.create())
+           .build()
+
+   }
+
 }
